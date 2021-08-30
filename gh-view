@@ -1,0 +1,11 @@
+#! /bin/bash
+set -e
+
+REPO=$(gh repo list $1 --json nameWithOwner -q '.[].nameWithOwner' | fzf)
+
+if [ $? -ne 0 ];then
+  exit 1
+fi
+
+gh repo view --web "${REPO}"
+
